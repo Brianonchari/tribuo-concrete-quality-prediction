@@ -9,10 +9,18 @@ public class SmartConstructionApplication {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(SmartConstructionApplication.class, args);
+
 //        ConcreteStrengthClassification classification = new ConcreteStrengthClassification();
 //        classification.createTrainer();
 //        classification.createDataSets();
 //        classification.trainAndEvaluate();
+
+        helloWorld("He;;");
+
+    }
+
+    public static String helloWorld(String str) {
+        return str;
     }
 
 }

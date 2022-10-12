@@ -1,10 +1,12 @@
 package com.smartconstruction.smartconstruction.api.controller;
 
 import com.oracle.labs.mlrg.olcut.provenance.ProvenanceUtil;
+import com.smartconstruction.smartconstruction.api.PredictionRepository;
 import com.smartconstruction.smartconstruction.api.dtos.request.ConcreteStrengthRequest;
 import com.smartconstruction.smartconstruction.api.dtos.response.ConcreteStrengthResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class ConcreteStrengthPredictionController {
     private static Logger logger = LoggerFactory.getLogger(ConcreteStrengthPredictionController.class);
     private static final String MODEL_PATH = "src/main/resources/models/concrete-strength-regressor.ser";
     private final Model<Regressor> model;
+    @Autowired
+    private PredictionRepository predictionRepository;
 
     public ConcreteStrengthPredictionController() throws Exception {
         this.model = loadModel();
@@ -67,6 +71,8 @@ public class ConcreteStrengthPredictionController {
                 ConcreteStrengthRequest.featureNames,
                 concreteStrengthRequest.getFeatureValues()
         );
+
+        predictionRepository.save(concreteStrengthRequest);
 
         Prediction<Regressor> prediction = model.predict(example);
         double result = prediction.getOutput().getValues()[0];
