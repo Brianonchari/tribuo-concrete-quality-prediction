@@ -17,8 +17,9 @@ import org.tribuo.evaluation.TrainTestSplitter;
 import java.nio.file.Paths;
 
 public class ConcreteStrengthClassification {
-    private static Logger logger = LoggerFactory.getLogger(ConcreteStrengthClassification.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConcreteStrengthClassification.class);
     private static final String DATASET_PATH = "src/main/resources/datasets/concrete_dataset.csv";
+//    private static final String DATASET_PATH = "src/main/resources/datasets/Concrete_Data.csv";
 
     protected Trainer<Label> trainer;
     protected Dataset<Label> trainSet;
@@ -37,7 +38,8 @@ public class ConcreteStrengthClassification {
         logger.info("====CREATING DATASETS====");
         LabelFactory labelFactory = new LabelFactory();
         CSVLoader<Label> csvLoader = new CSVLoader<>(',', CSVIterator.QUOTE, labelFactory);
-        DataSource<Label> dataSource = csvLoader.loadDataSource(Paths.get(DATASET_PATH),"Concrete compressive strength(MPa, megapascals) ");
+//        ListDataSource<Label> dataSource = csvLoader.loadDataSource(Paths.get(DATASET_PATH),"Strength");
+        ListDataSource<Label> dataSource = csvLoader.loadDataSource(Paths.get(DATASET_PATH),"Concrete compressive strength(MPa, megapascals) ");
 
         TrainTestSplitter<Label> dataSplitter = new TrainTestSplitter<>(dataSource,0.7,1L);
         trainSet = new MutableDataset<>(dataSplitter.getTrain());
@@ -72,3 +74,7 @@ public class ConcreteStrengthClassification {
     }
 
 }
+
+
+
+
