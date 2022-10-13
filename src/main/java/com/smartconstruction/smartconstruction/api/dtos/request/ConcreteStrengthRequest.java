@@ -1,12 +1,8 @@
 package com.smartconstruction.smartconstruction.api.dtos.request;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "mixtures")
 public class ConcreteStrengthRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     public static final  String [] featureNames = {"Cement (component 1)(kg in a m^3 mixture)","Stone Pebbles-Kokoto (component 2)(kg in a m^3 mixture)","Quarry Dust(component 3)(kg in a m^3 mixture)","Water  (component 4)(kg in a m^3 mixture)","Superplasticizer (component 5)(kg in a m^3 mixture)","Coarse Sand (component 6)(kg in a m^3 mixture)","Fine Sand (component 7)(kg in a m^3 mixture)","Age (day)","Concrete compressive strength(MPa, megapascals) "};
 
